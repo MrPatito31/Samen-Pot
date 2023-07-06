@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/styleS.css' %}">
+<script src="{% static 'funciones/funciones_sesion.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <form action="{% url 'home' %}" class="index-button">
+            <button type="submit">
+                Inicio
+            </button>
+        </form>
+    </nav>
+    <section>    
+        <h1>Suscribete a la fundacion</h1>
+        {% if suscrito %}
+            <h3>Felicidades disfruta de tu suscripcion</h3>
+        {% else %}
+            <h1>Beneficios de Suscribirse</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit</p>
+            <form action="{% url 'suscribir' %}" method="post">
+                {% csrf_token %}
+                <button id="sus" class="sus" type="submit">Suscribirse</button>
+            </form>
+        {% endif %}
+    </section>
+</body>
+{% endblock %}

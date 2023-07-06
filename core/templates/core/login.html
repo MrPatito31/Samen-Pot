@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/styleL.css' %}">
+<script src="{% static 'funciones/funciones_sesion.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <form action="{% url 'home' %}" class="index-button">
+            <button type="submit">
+                Inicio
+            </button>
+        </form>
+    </nav>
+    <section>    
+        <form id="login" method="post">
+            {% csrf_token %}
+            <div id="login-box">
+                <h1 class="login-title">Iniciar Sesion</h1>
+                <input type="text" id="idusername" name="username" placeholder="Usuario">
+                <input type="password" id="id_password" name="password" placeholder="Contraseña">
+                <button id="boton" >Iniciar Sesion</button>
+                <p>¿No tienes cuenta? <a class="registro" href="{% url 'registro' %}">Registrate</a></p>
+            </div>
+    </section>
+</body>
+{% endblock %}

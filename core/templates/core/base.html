@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samen&Pot</title>
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <div id="arriba">
+            <div id="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}"></img></a>
+                <a href="{% url 'home' %}">Samen&Pot</a>
+            </div>
+            <div id="user">
+                {% if user.is_authenticated %}
+                <i class="fa fa-user" aria-hidden="true" style="color: #FFFFFF;"></i>
+                    {{user.username}}
+                    {% if suscrito %}
+                        <i class="fa fa-star-o" aria-hidden="true" style="color: #FFFFFF;"></i>
+                    {% else %}
+                    <i class="fa fa-ban" aria-hidden="true" style="color: #FFFFFF;"></i>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    {% block content %} 
+
+    {% endblock %}
+    <footer>
+        <div class="footer-content">
+            <h3>Samen&Pot</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo iste corrupti doloribus odio sed!</p>
+            <ul class="socials">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>copyright &copy;2023 Todos los Derechos Reservados <span>Samen&Pot</span></p>
+        </div>
+    </footer>
+    </html>

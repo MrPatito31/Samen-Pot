@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    <nav>
+        {% if user.is_authenticated %}
+            <form action="{% url 'carrito' %}" class="seguimiento-button">
+                <button type="submit">
+                    Compras
+                </button>
+            </form>
+            <form action="{% url 'suscribir' %}" class="donar-button">
+                <button type="submit">
+                    Suscripcion
+                </button>
+            </form>
+            <form action="{% url 'logout' %}" class="logout-button">
+                <button type="submit">
+                    Logout
+                </button>
+            </form>
+        {% else %}
+           <form action="{% url 'login' %}" class="login-button">
+                <button type="submit">
+                    Login
+                </button>
+            </form>
+            <form action="{% url 'carrito' %}" class="seguimiento-button">
+                <button type="submit">
+                    Carro
+                </button>
+            </form>
+            <form action="{% url 'suscribir' %}" class="donar-button">
+                <button type="submit">
+                    Suscripcion
+                </button>
+            </form>
+        {% endif %}
+    </nav>
+    <div>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner c-item">
+              <div class="carousel-item active">
+                <img src="{% static 'img/baner1.jpg' %}" class="d-block w-100 c-img" alt="...">
+                <h1>Transforma tu jardín en un paraíso verde con nuestros productos de calidad</h1>
+              </div>
+              <div class="carousel-item c-item">
+                <img src="{% static 'img/baner2.jpg' %}" class="d-block w-100 c-img" alt="...">
+                <h1>sdfghjkl</h1>
+              </div>
+              <div class="carousel-item c-item">
+                <img src="{% static 'img/baner3.jpg' %}" class="d-block w-100 c-img" alt="...">
+                <h1>dfghjkl</h1>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </div>
+    <h1 id="titulo" style="margin-bottom: 0rem;">Productos</h1>
+    <section id="contenedor-productos">
+        {% for producto in produ %}
+        <form action="{% url 'addtocar' producto.codigo %}">
+            <div class="producto">
+                <img class="producto-imagen" src="{{ producto.imagen }}" alt="" height="250" width="250">
+                <div class="producto-detalles">
+                    <h3 class="producto-titulo">{{ producto.nombre }}</h3>
+                    <p class="producto-precio">Precio: ${{ producto.precio }}</p>
+                    <p class="producto-precio-desc">{{ producto.tachado }}</p>
+                    <p class="producto-stock">Quedan: {{ producto.stock }}</p>
+                    <button class="producto-agregar">Agregar</button>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+{% endblock %}

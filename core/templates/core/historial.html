@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/styleH.css' %}">
+{% endblock %}
+
+{% block content %}
+<nav>
+    <form action="{% url 'home' %}" class="index-button">
+        <button type="submit">
+            Inicio
+        </button>
+    </form>
+    <form action="{% url 'comprar' %}" class="seguimiento-button">
+        <button type="submit">
+            Compras
+        </button>
+    </form>
+</nav>
+<section>
+    <h1 style="color: #FFFFFF; display: flex; justify-content: center; padding: 17px 0px;">Historial de Compras</h1>
+    <form style="margin: 60px;" id="tabla">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Detalle</th>
+            </tr>
+            <tbody>
+                {% for fila in ventas %}  
+                <tr>
+                    <td>{{fila.id}}</td>
+                    <td>{{fila.fecha}}</td>
+                    <td>{{fila.total}}</td>
+                    <td>
+                        <a href="{% url 'dropitem' fila.id %}">
+                            ver detalle
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</section>
+{% endblock %}
